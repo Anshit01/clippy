@@ -15,44 +15,43 @@ body {
     background-color: #000;
     overflow-x: hidden;
     padding-top: 20px;
-  }
-  
-  .sidenav a {
+}
+
+.sidenav a {
     padding: 16px 2px 16px 36px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
     font-family: 'Montserrat', sans-serif;
-  }
+}
   
-  .sidenav  a:hover {
+.sidenav  a:hover {
     background-color: #212529;
     color: #fff;
     text-decoration: none;
-  }
+}
 
-    .fa-plus-circle {
+.fa-plus-circle {
       color: #fff;
-    }
+}
 
-  .sidenav  h1 {
-      color: #2ecc71;
-      padding: 6px 2px 6px 46px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 50px;
-      font-weight: 800;
-      letter-spacing: 4px;
-  }
-  
+.sidenav  h1 {
+    color: #2ecc71;
+    padding: 6px 2px 6px 46px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
 
-  .sidenav p {
-      font-size: 16px;
-      color: #545c64;
-      padding: 0px 2px 6px 36px;
-  }
+.sidenav p {
+    font-size: 16px;
+    color: #545c64;
+    padding: 0px 2px 6px 36px;
+}
   
-  .sidenav .dropdown-btn {
+.sidenav .dropdown-btn {
     padding: 16px 2px 6px 36px;
     text-decoration: none;
     font-size: 25px;
@@ -65,36 +64,31 @@ body {
     cursor: pointer;
     outline: none;
     font-family: 'Montserrat', sans-serif;
-  }
+}
   
-  .sidenav .dropdown-container {
+.sidenav .dropdown-container {
     display: none;
     
     padding-left: 8px;
    
   }
   
-  .sidenav .dropdown-container a {
-      font-size: 18px;
-      letter-spacing: 2px;
-      background-color: #121417;
-      border-bottom: 2px #adb5bd;
-  }
+.sidenav .dropdown-container a {
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: #121417;
+    border-bottom: 2px #adb5bd;
+}
 
-  .cross {
-      color: #818181;
-  }
-
-  hr{
-      background-color: #545c64;
-  }
 
   /*main section starts here*/
   
-  .main h1{
-      padding-left: 540px;
-  }
+.main h1{
+    padding-left: 540px;
+}
 
-  
 
+hr{
+    background-color: #545c64;
+}
   
