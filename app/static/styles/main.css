@@ -6,6 +6,10 @@ body {
     
 }
 
+#main {
+    margin-left: 350px;
+}
+
 .sidenav {
     height: 100%;
     width: 350px;
@@ -87,4 +91,3 @@ body {
 hr{
     background-color: #545c64;
 }
-  
