@@ -10,6 +10,8 @@ flask = "*"
 gunicorn = "*"
 pymongo = "*"
 dnspython = "*"
+flask-socketio = "*"
+eventlet = "*"
 
 [requires]
 python_version = "3.8"

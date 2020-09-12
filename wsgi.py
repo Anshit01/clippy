@@ -1,4 +1,4 @@
-from app.main import app
+from app.main import app, socketio
 from app import config
 
 if __name__ == '__main__':
@@ -6,4 +6,4 @@ if __name__ == '__main__':
     if hasattr(config, 'debug'):
         if config.debug == True:
             debug = True
-    app.run(debug=debug)
+    socketio.run(app, debug=debug)
