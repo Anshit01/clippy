@@ -1,5 +1,6 @@
 from app.main import app, socketio
 from app import config
+import eventlet
 
 if __name__ == '__main__':
     debug = False
