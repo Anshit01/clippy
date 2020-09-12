@@ -6,10 +6,6 @@ body {
     
 }
 
-#main {
-    margin-left: 350px;
-}
-
 .sidenav {
     height: 100%;
     width: 350px;
@@ -85,8 +81,12 @@ body {
 }
 
 
-  /*main section starts here*/
-  
+/*main section starts here*/
+
+.main {
+    margin-left: 350px;
+}
+
 .main h1{
     padding-left: 540px;
 }
