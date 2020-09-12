@@ -18,10 +18,11 @@ body {
 }
 
 .sidenav a {
-    padding: 16px 2px 6px 36px;
+    padding: 16px 2px 16px 36px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
+    display: block;
     font-family: 'Montserrat', sans-serif;
 }
   
@@ -43,12 +44,11 @@ body {
     font-weight: 800;
     letter-spacing: 4px;
 }
-  
 
 .sidenav p {
     font-size: 16px;
     color: #545c64;
-    padding: 0px 2px 0px 36px;
+    padding: 0px 2px 6px 36px;
 }
   
 .sidenav .dropdown-btn {
@@ -80,9 +80,13 @@ body {
     border-bottom: 2px #adb5bd;
 }
 
-.cross {
-    color: #818181;
+
+  /*main section starts here*/
+  
+.main h1{
+    padding-left: 540px;
 }
+
 
 hr{
     background-color: #545c64;
