@@ -10,21 +10,55 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/static/styles/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <textarea id="textarea" rows="20" cols="80"></textarea>
-    <button id="btn1" class="btn btn-primary">Save</button>
-    <button id="btn2" class="btn btn-secondary">Cancel</button>
-
-
+    
     <div class="navbar d-md-none">
 
     </div>
 
-    <div class="sidebar d-none d-md-block">
+    <div class="sidenav d-none d-md-block">
         
+        <div class="row">
+            <h1>CLIPPY</h1>
+            <img src="static/styles/images/brand.png">
+        </div>
+        <hr>
+        <div>
+            <a href="#" >New Clip  <i class="fa fa-plus-circle new" aria-hidden="true"></i></a>
+           
+            
+            <p>Click here to add new clip</p>
+        </div>
+       
+        <div>
+            <a href="#">Open</a>
+            <p>Upload files here</p>
+        </div>
+        
+
+        <button class="dropdown-btn">Saved Clips
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <div class="dropdown-container">
+            <span>
+                <a href="#">Clip 1</a>
+                <a href="#"><i class="fa fa-times cross" aria-hidden="true"></i></a>
+            </span>
+            <div>
+            <a href="#">Clip 2</a>
+            </div>
+            <div>
+            <a href="#">Clip 3</a>
+            </div>
+        </div>
+
+        <a href="#">Logout</a>
+
     </div>
 
     <!-- Javascript -->
@@ -32,5 +66,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
     <script src="/static/scripts/main.js"></script>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+        
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+        </script>
+
 </body>
 </html>
