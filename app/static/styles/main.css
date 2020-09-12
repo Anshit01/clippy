@@ -81,8 +81,12 @@ body {
 }
 
 
-  /*main section starts here*/
-  
+/*main section starts here*/
+
+.main {
+    margin-left: 350px;
+}
+
 .main h1{
     padding-left: 540px;
 }
@@ -91,4 +95,3 @@ body {
 hr{
     background-color: #545c64;
 }
-  
