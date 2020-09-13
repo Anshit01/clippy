@@ -1,16 +1,25 @@
 document.getElementById('textarea').innerHTML = "Helloafsdf"
 var curTime = getCurrentTime()
-var text = ''
+var lastUpdateTime = getPreciseCurrentTime()
+var textareaText = ''
 
 $(document).ready( () => {
     var socket = io.connect('/')
     socket.on('connect', () => {
-        // socket.send('User has connected!')
+        socket.send('User has connected!')
     })
 
     socket.on('message', (msg) => {
-        $('#textarea').val(msg)
-        text = msg.toString()
+        // $('#textarea').val(msg)
+        // text = msg.toString()
+        console.log('message: ' + msg)
+    })
+
+    socket.on('text_response', (text, timestamp) => {
+        if(timestamp > lastUpdateTime){
+            textareaText = text
+            $('#textarea').val(text)
+        }
     })
 
     $('#btn1').click(() => {
@@ -24,9 +33,9 @@ $(document).ready( () => {
     
     setInterval(() => {
         var curText = $('#textarea').val()
-        if(curText != text){
-            socket.send(curText)
-            text = curText
+        if(curText != textareaText){
+            socket.emit('update_text', curText, getPreciseCurrentTime())
+            textareaText = curText
         }
     }, 1000)
 
@@ -34,4 +43,8 @@ $(document).ready( () => {
 
 function getCurrentTime() {
     return Math.floor(new Date().getTime() / 1000)
+}
+
+function getPreciseCurrentTime() {
+    return new Date().getTime()
 }
