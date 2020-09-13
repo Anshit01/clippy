@@ -16,8 +16,6 @@ $(document).ready( () => {
     })
 
     socket.on('message', (msg) => {
-        // $('#textarea').val(msg)
-        // text = msg.toString()
         console.log('message: ' + msg)
     })
 
