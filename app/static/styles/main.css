@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     
+    
 }
 
 .sidenav {
@@ -14,8 +15,10 @@ body {
     left: 0;
     background-color: #000;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 20px;  
+
 }
+
 
 .sidenav a {
     padding: 16px 2px 16px 36px;
@@ -84,11 +87,16 @@ body {
 /*main section starts here*/
 
 .main {
-    margin-left: 350px;
+    margin-left: 0px;
 }
 
-.main h1{
-    padding-left: 540px;
+.container {
+    margin-left: 0;
+    float: left;
+}
+
+.main .text-field {
+    margin-top: 10%;
 }
 
 
