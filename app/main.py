@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, session
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit
 from pymongo import MongoClient
 
 from app import config
@@ -24,6 +24,12 @@ def index_route():
     return render_template('index.html')
 
 @socketio.on('message')
-def handleMessage(msg):
+def handle_message(msg):
     print('Message: ' + msg)
     send(msg, broadcast=True)
+
+@socketio.on('update_text')
+def handle_text(text, timestamp):
+    print('Text: ' + text)
+    emit('text_response', (text, timestamp), broadcast=True)
+
