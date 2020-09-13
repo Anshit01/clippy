@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     
+    
 }
 
 .sidenav {
@@ -12,10 +13,12 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #000;
+    background-color: #10002b;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 20px;  
+
 }
+
 
 .sidenav a {
     padding: 16px 2px 16px 36px;
@@ -27,7 +30,7 @@ body {
 }
   
 .sidenav  a:hover {
-    background-color: #212529;
+    background-color: #1e0052;
     color: #fff;
     text-decoration: none;
 }
@@ -37,12 +40,16 @@ body {
 }
 
 .sidenav  h1 {
-    color: #2ecc71;
+    color: #e0aaff;
     padding: 6px 2px 6px 46px;
     font-family: 'Montserrat', sans-serif;
     font-size: 50px;
     font-weight: 800;
     letter-spacing: 4px;
+}
+
+hr{
+    background-color: #e0aaff;
 }
 
 .sidenav p {
@@ -76,7 +83,7 @@ body {
 .sidenav .dropdown-container a {
     font-size: 18px;
     letter-spacing: 2px;
-    background-color: #121417;
+    background-color: #1e0052;
     border-bottom: 2px #ced4da;
 }
 
@@ -84,15 +91,73 @@ body {
 /*main section starts here*/
 
 .main {
-    margin-left: 350px;
+    margin-left: 0px;
 }
 
-.main h1{
-    padding-left: 540px;
+.container {
+    margin-left: 0;
+    float: left;
 }
 
+.main .text-field {
+    margin-top: 15%;
+}
 
-hr{
-    background-color: #545c64;
+.text-field {
+    height: 100vh;
+}
+
+/* buttons */
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+.my-float{
+	margin-top:22px;
+}
+
+.delete {
+    position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:150px;
+	background-color:#fb8500;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.login {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #0f4c5c;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+
+}
+
+.sync {
+    color: #000000;
+    position: fixed;
+    top: 20px;
+    right: 180px;
+
+
 }
 
