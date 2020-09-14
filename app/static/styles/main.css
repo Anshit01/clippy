@@ -7,7 +7,7 @@ body {
     
 }
 
-.sidenav {
+/* .sidenav {
     height: 100%;
     width: 350px;
     position: fixed;
@@ -85,7 +85,7 @@ hr{
     letter-spacing: 2px;
     background-color: #1e0052;
     border-bottom: 2px #ced4da;
-}
+} */
 
 
 /*main section starts here*/
@@ -96,11 +96,11 @@ hr{
 
 .container {
     margin-left: 0;
-    float: left;
+    
 }
 
 .main .text-field {
-    margin-top: 15%;
+    margin-top: 90px;
 }
 
 .text-field {
@@ -109,33 +109,40 @@ hr{
 
 /* buttons */
 
-.float{
+/* .float{
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:40px;
-	right:40px;
+	bottom:45px;
+	left:50px;
 	background-color:#0C9;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
 	box-shadow: 2px 2px 3px #999;
 }
-.my-float{
-	margin-top:22px;
-}
 
-.delete {
-    position:fixed;
+.float:hover{
+    color:#FFF;
+} */
+
+/* .my-float{
+	margin-top:22px;
+} */
+
+/* .delete {
 	width:60px;
 	height:60px;
-	bottom:40px;
-	right:150px;
+	bottom:45px;
 	background-color:#fb8500;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
 	box-shadow: 2px 2px 3px #999;
+} */
+
+.delete:hover{
+    color: #fff;
 }
 
 .login {
@@ -149,7 +156,10 @@ hr{
     padding: 5px 20px 5px 20px;
     margin-bottom: 40px;
     letter-spacing: 2px;
+}
 
+.login:hover{
+    color: #fff;
 }
 
 .sync {
@@ -157,7 +167,75 @@ hr{
     position: fixed;
     top: 20px;
     right: 180px;
-
-
 }
 
+.sync:hover{
+    color: #fff;
+}
+
+/* .open {
+    position:fixed;
+	width:60px;
+	height:60px;
+	bottom:45px;
+	left:350px;
+	background-color:#ef233c;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+} */
+
+.open:hover{
+    color: #fff;
+}
+
+/* .save {
+    position:fixed;
+	width:60px;
+	height:60px;
+	bottom:45px;
+	left:250px; 
+	background-color:#9d4edd;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    outline: 0;
+} */
+
+.save:hover{
+    color: #fff;
+    cursor: pointer;
+}
+
+.save:focus{
+    outline: 0;
+}
+
+
+.bottom-bar{
+    border-radius: 40px;
+    background-color: #e9ecef;
+    position:fixed;
+    bottom: 40px;
+    /* width: 750px; */
+    height: 80px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.bottom-btn {
+    width: 60px;
+    height: 60px;
+    /* margin: 10px 10px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: green !important;
+    border-radius: 50px !important;
+}
+
+.dropup {
+    display: inline;
+}
