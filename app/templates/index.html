@@ -37,12 +37,12 @@
       
             <ul class=" navbar-nav navbar-right ">
 
-                <a href="#" class="login mr-2 "><img src="static/styles/images/user.png" class="user">Login</a>
-
                 <a href="#" class="sync ml-3 text-center">
                     <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
                     <p>Sync now</p>
                 </a>
+                <a id="login-btn" class="login mr-2 ">Login</a>
+                <img id="profile-img" src="/static/styles/images/user.png" class="user">
 
             </ul>
         
@@ -73,12 +73,12 @@
     
                     <div class=" mx-1 mx-md-2 mx-lg-4  dropup ">
                         <a  class="dropdown-toggle save bottom-btn text-center" data-toggle="dropdown"><i class="fa fa-file-text fa-lg my-float" aria-hidden="true"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Clip 1</a>
+                        <div id="recent-clip-list" class="dropdown-menu">
+                            <a class="dropdown-item recent-clip">Clip 1</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Clip 2</a>
+                            <a class="dropdown-item recent-clip">Clip 2</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Clip 3</a>
+                            <a class="dropdown-item recent-clip">Clip 3</a>
                         </div>
                     </div>
     
@@ -94,6 +94,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
     <script src="/static/scripts/main.js"></script>
 
 </body>

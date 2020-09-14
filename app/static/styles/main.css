@@ -14,8 +14,12 @@ body {
 }
 
 .text-field { 
-    height: 100vh;  /*main text area starts her*/
+    /* padding: 50px;  main text area starts her */
+    position: absolute;
+    padding-bottom: 120px !important;
+    resize: none;
 }
+
 
 /**************************************************bottom bar *******************************************/
 
@@ -67,7 +71,14 @@ body {
     height: 80px;
     left: 50%;
     transform: translate(-50%, 0);
-    box-shadow: 2px 2px 3px #999;
+    /* box-shadow: 2px 2px 3px #999; */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.bottom-bar:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    transform: translate(-50%, -5px);
 }
 
 .bottom-btn {
@@ -81,7 +92,13 @@ body {
     border-radius: 50px !important;
     color:#FFF;
     text-align:center;
-    box-shadow: 2px 2px 3px #999;
+    /* box-shadow: 2px 2px 3px #999; */
+    /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); */
+    transition: transform 0.3s;
+}
+
+.bottom-btn:hover {
+    transform: scale(1.1);
 }
 
 .dropup {
@@ -100,7 +117,7 @@ body {
     margin-bottom: 20px;
     margin-top: 20px;
     letter-spacing: 2px;
-    width: 135px;
+    /* width: 135px; */
     
 }
 
@@ -109,7 +126,9 @@ body {
 }
 
 .user{
-    width: 25%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     margin-left: 1px;
     margin-right: 10px;
 }

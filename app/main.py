@@ -18,6 +18,7 @@ socketio.init_app(app, cors_allowed_origins="*") ########### WARNING: remove in 
 cluster = MongoClient(f'mongodb+srv://{config.DB_USERNAME}:{config.DB_PASSWORD}@cluster0.erdus.mongodb.net/database?retryWrites=true&w=majority')
 database = cluster['database']
 users_collection = database.users
+clip_list_collection = database.clip_list
 clips_collection = database.clips
 
 
@@ -39,3 +40,31 @@ def handle_text(connection_id, text, timestamp):
     print('Text: ' + text)
     emit('text_response', (connection_id, text, timestamp), broadcast=True)
 
+@socketio.on('login')
+def handle_login(name, email, uid):
+    print('Login: ' + name + ' ' + email + ' ' + uid)
+    user = users_collection.find_one({'email': email})
+    err = None
+    clip_list = {}
+    if user:
+        if uid == user['uid']:
+            print(str(user))
+            id = user['_id']
+            clip_list = clip_list_collection.find_one({'_id': id})
+        else:
+            print('attempt to login with wrong credentials')
+            err = 'Invalid Credentials'
+    else:
+        id = 'id_' + uuid.uuid4().hex
+        users_collection.insert_one({
+            '_id': id,
+            'name': name,
+            'email': email,
+            'uid': uid
+        })
+        clip_list_collection.insert_one({
+            '_id': id
+        })
+        print('user added')
+    emit('login_response', (err, id, name, email, clip_list))
+    
