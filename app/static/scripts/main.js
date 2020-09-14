@@ -3,6 +3,9 @@ var curTime = getCurrentTime()
 var lastUpdateTime = getPreciseCurrentTime()
 var textareaText = ''
 var connection_id = ''
+var user_id = ''
+var user_name = ''
+var user_email = ''
 
 // Firebase configuration
 var firebaseConfig = {
@@ -19,15 +22,36 @@ firebase.initializeApp(firebaseConfig);
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
+var res
 
-
+var socket
 $(document).ready( () => {
 
+    $('#textarea').focus();
+
     $('#login-btn').click(() => {
-        alert('asf')
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            var name = result.user.displayName
+            var email = result.user.email
+            var uid = result.user.uid
+            var photoURL = result.user.photoURL
+            socket.emit('login', name, email, uid)
+            res = result
+            console.log('logged in')
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            res = error
+            console.log('error in login')
+          });
     })
 
-    var socket = io.connect('/')
+    socket = io.connect('/')
     socket.on('connect', () => {
         socket.send('User has connected!')
     })
@@ -37,8 +61,24 @@ $(document).ready( () => {
         console.log('connected with connection_id: ' + connection_id)
     })
 
+    socket.on('login_response', (err, id, name, email) => {
+        console.log('logged in finally')
+        if(err){
+            console.log('error in login to backend')
+        }else{
+            user_id = id
+            user_name = name
+            user_email = email
+        }
+    })
+
     socket.on('message', (msg) => {
         console.log('message: ' + msg)
+    })
+
+    socket.on('test_response', (err, json) => {
+        console.log(err);
+        console.log(json)
     })
 
     socket.on('text_response', (con_id, text, timestamp) => {

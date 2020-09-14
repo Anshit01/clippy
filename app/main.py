@@ -39,3 +39,26 @@ def handle_text(connection_id, text, timestamp):
     print('Text: ' + text)
     emit('text_response', (connection_id, text, timestamp), broadcast=True)
 
+@socketio.on('login')
+def handle_login(name, email, uid):
+    print('Login: ' + name + ' ' + email + ' ' + uid)
+    user = users_collection.find_one({'email': email})
+    err = None
+    if user:
+        if uid == user.uid:
+            print(str(user))
+            id = user['_id']
+        else:
+            print('attempt to login with wrong credentials')
+            err = 'Invalid Credentials'
+    else:
+        id = 'id_' + uuid.uuid4().hex
+        users_collection.insert_one({
+            '_id': id,
+            'name': name,
+            'email': email,
+            'uid': uid
+        })
+        print('user added')
+    emit('login_response', (err, id, name, email))
+    

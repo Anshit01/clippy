@@ -7,6 +7,14 @@ body {
     
 }
 
+#textarea {
+    position: relative;
+    height: 500px;
+    z-index: 0;
+    height: 100vh;
+    width: 100%;
+}
+
 /* .sidenav {
     height: 100%;
     width: 350px;
