@@ -3,26 +3,21 @@ body {
     margin: 0;
     padding: 0;
 }
-/*main section starts here*/
+/**********************************main section starts here*********************************************/
 
 .main {
     margin-left: 0px;
 }
 
 .container {
-    margin-left: 0;
-    
+    margin-left: 0;  
 }
 
-.main .text-field {
-    margin-top: 90px;
+.text-field { 
+    height: 100vh;  /*main text area starts her*/
 }
 
-.text-field {
-    height: 100vh;
-}
-
-/* buttons */
+/**************************************************bottom bar *******************************************/
 
 .new{
 	background-color:#0C9;
@@ -32,43 +27,11 @@ body {
     color:#FFF;
 } 
 
-/* .my-float{
-	margin-top:22px;
-} */
-
 .delete {
 	background-color:#fb8500;
 }
 
 .delete:hover{
-    color: #fff;
-}
-
-.login {
-    position: fixed;
-    top: 20px;
-    right: 40px;
-    font-size: 20px;
-    color: #fff;
-    background-color: #0f4c5c;
-    border-radius: 20px;
-    padding: 5px 20px 5px 20px;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-}
-
-.login:hover{
-    color: #fff;
-}
-
-.sync {
-    color: #000000;
-    position: fixed;
-    top: 20px;
-    right: 180px;
-}
-
-.sync:hover{
     color: #fff;
 }
 
@@ -123,4 +86,49 @@ body {
 
 .dropup {
     display: inline;
+}
+
+/***************************************** top bar css starts here*********************************/
+
+
+.login {
+    font-size: 20px;
+    color: #fff;
+    background-color: #0f4c5c;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    width: 135px;
+    
+}
+
+.login:hover{
+    color: #fff;
+}
+
+.user{
+    width: 25%;
+    margin-left: 1px;
+    margin-right: 10px;
+}
+
+.sync {
+    color: #000000;
+    margin-top: 20px;
+}
+
+.sync:hover{
+    color: #000000;
+}
+
+.sync:focus{
+    outline: 0;
+    text-decoration: none;
+}
+
+
+.navbar h1 {
+    letter-spacing: 2px;
 }
