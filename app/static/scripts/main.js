@@ -6,6 +6,7 @@ var connection_id = ''
 var user_id = ''
 var user_name = ''
 var user_email = ''
+var photoURL = ''
 
 // Firebase configuration
 var firebaseConfig = {
@@ -27,28 +28,45 @@ var res
 var socket
 $(document).ready( () => {
 
+    var textareaTopOffset = $('#textarea').offset().top
+    $('#textarea').outerHeight($(document).height() - textareaTopOffset)
+
     $('#textarea').focus();
 
+    $(window).on('resize', () => {
+        $('#textarea').outerHeight($(document).height() - $('#textarea').offset().top)
+    })
+
     $('#login-btn').click(() => {
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-            var name = result.user.displayName
-            var email = result.user.email
-            var uid = result.user.uid
-            var photoURL = result.user.photoURL
-            socket.emit('login', name, email, uid)
-            res = result
-            console.log('logged in')
-          }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            res = error
-            console.log('error in login')
-          });
+        if($('#login-btn').html() == 'Login'){
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                var name = result.user.displayName
+                var email = result.user.email
+                var uid = result.user.uid
+                photoURL = result.user.photoURL
+                socket.emit('login', name, email, uid)
+                res = result
+                console.log('logged in')
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                res = error
+                console.log('error in login')
+            });
+        }else{
+            firebase.auth().signOut().then(function() {
+                console.log('Signed out')
+                $('#login-btn').html('Login')
+                $('#profile-img').attr('src', '/static/styles/images/user.png')
+            }).catch(function(error) {
+                console.error('Sign out error')
+            });
+        }
     })
 
     socket = io.connect('/')
@@ -61,14 +79,30 @@ $(document).ready( () => {
         console.log('connected with connection_id: ' + connection_id)
     })
 
-    socket.on('login_response', (err, id, name, email) => {
+    socket.on('login_response', (err, id, name, email, clipList) => {
         console.log('logged in finally')
         if(err){
-            console.log('error in login to backend')
+            console.error('error in login to backend')
+            console.error(err)
         }else{
             user_id = id
             user_name = name
             user_email = email
+            $('#profile-img').attr('src', photoURL)
+            $('#login-btn').html('Log out')
+            
+            //filling recent clips drop down list
+            var clipLength = Object.keys(clipList).length
+            var i = 1
+            var content = ''
+            for(clip_id in clipList){
+                content += '<a id="' + clip_id + '" class="dropdown-item recent-clip">' + clipList[clip_id] + '</a>'
+                if(i < clipLength){
+                    content += '<div class="dropdown-divider"></div>'
+                }
+                i++
+            }
+            $('#recent-clip-list').html(content)
         }
     })
 
@@ -88,9 +122,6 @@ $(document).ready( () => {
         }
     })
 
-    $('#btn1').click(() => {
-        // socket.send('asfjafkdahfkh')
-    })
 
     // $('#textarea').on('input', () => {
     //     text = $('#textarea').val()
