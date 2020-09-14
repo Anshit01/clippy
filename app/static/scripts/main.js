@@ -4,7 +4,29 @@ var lastUpdateTime = getPreciseCurrentTime()
 var textareaText = ''
 var connection_id = ''
 
+// Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyBlkHqdolHzPDu7lYuAmPv7K1ImaPAr9Lk",
+    authDomain: "clippy-3da02.firebaseapp.com",
+    databaseURL: "https://clippy-3da02.firebaseio.com",
+    projectId: "clippy-3da02",
+    storageBucket: "clippy-3da02.appspot.com",
+    messagingSenderId: "476084889049",
+    appId: "1:476084889049:web:84211cd1769b7ef39225c8"
+  };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var provider = new firebase.auth.GoogleAuthProvider();
+
+
+
 $(document).ready( () => {
+
+    $('#login-btn').click(() => {
+        alert('asf')
+    })
+
     var socket = io.connect('/')
     socket.on('connect', () => {
         socket.send('User has connected!')
