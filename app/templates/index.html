@@ -16,7 +16,7 @@
 </head>
 <body>
     
-    <div class="navbar d-md-none">
+    <!-- <div class="navbar d-md-none">
 
     </div>
 
@@ -24,8 +24,8 @@
         
         <div class="row">
             <h1>CLIPPY</h1>
-            <!-- <img src="static/styles/images/brand.png"> -->
-        </div>
+             <img src="static/styles/images/brand.png"> -->
+        <!-- </div>
         <hr>
         <div>
             <a href="#" >New Clip</a>
@@ -37,10 +37,10 @@
         <div>
             <a href="#">Open</a>
             <p>Upload files here</p>
-        </div>
+        </div> -->
         
 
-        <button class="dropdown-btn">Saved Clips
+        <!-- <button class="dropdown-btn">Saved Clips
             <i class="fa fa-caret-down"></i>
         </button>
 
@@ -57,9 +57,9 @@
 
         <a href="#">Logout</a>
 
-    </div>
+    </div> --> 
 
-    <div class="container main text-center">
+<div class="container main text-center">
 
         <a id="login-btn" class="login">Login</a>
 
@@ -70,18 +70,42 @@
   
         <textarea id="textarea" style="min-width: 100%" class="form-control text-field"></textarea>
 
-        <a href="#" class="delete">
-            <i class="fa fa-trash fa-lg my-float" aria-hidden="true"></i>
-        </a>
+        <div class="row text-center">
 
-        <a href="#" class="float">
-            <i class="fa fa-plus fa-lg my-float"></i>
-        </a>
+            <div class="col-md-10 mx-auto">
 
-        
-        
-  
-    </div>
+                <div class="bottom-bar text ">
+
+                    <a href="#" class="btn delete mx-1 mx-md-2 mx-lg-4 bottom-btn">
+                        <i class="fa fa-trash fa-lg my-float" aria-hidden="true"></i>
+                    </a>
+            
+                    <a href="#" class="btn float mx-1 mx-md-2 mx-lg-4 bottom-btn">
+                        <i class="fa fa-plus fa-lg my-float"></i>
+                    </a>
+            
+                    <a href="#" class="btn open mx-1 mx-md-2 mx-lg-4 bottom-btn">
+                        <i class="fa fa-file fa-lg my-float" aria-hidden="true"></i>
+                    </a>
+    
+                    <div class="btn mx-1 mx-md-2 mx-lg-4 dropup bottom-btn">
+                        <a  class="dropdown-toggle save text-center" data-toggle="dropdown"><i class="fa fa-file-text fa-lg my-float" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">Separated link</a>
+                        </div>
+                    </div>
+    
+                </div>
+
+            </div>
+          
+        </div>
+    
+</div>
 
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
