@@ -1,93 +1,8 @@
 
-
 body {
     margin: 0;
     padding: 0;
-    
-    
 }
-
-/* .sidenav {
-    height: 100%;
-    width: 350px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #10002b;
-    overflow-x: hidden;
-    padding-top: 20px;  
-
-}
-
-
-.sidenav a {
-    padding: 16px 2px 16px 36px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    font-family: 'Montserrat', sans-serif;
-}
-  
-.sidenav  a:hover {
-    background-color: #1e0052;
-    color: #fff;
-    text-decoration: none;
-}
-
-.fa-plus-circle {
-      color: #fff;
-}
-
-.sidenav  h1 {
-    color: #e0aaff;
-    padding: 6px 2px 6px 46px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 50px;
-    font-weight: 800;
-    letter-spacing: 4px;
-}
-
-hr{
-    background-color: #e0aaff;
-}
-
-.sidenav p {
-    font-size: 16px;
-    color: #545c64;
-    padding: 0px 2px 6px 36px;
-}
-  
-.sidenav .dropdown-btn {
-    padding: 16px 2px 6px 36px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
-    font-family: 'Montserrat', sans-serif;
-}
-  
-.sidenav .dropdown-container {
-    display: none;
-    
-    padding-left: 8px;
-   
-  }
-  
-.sidenav .dropdown-container a {
-    font-size: 18px;
-    letter-spacing: 2px;
-    background-color: #1e0052;
-    border-bottom: 2px #ced4da;
-} */
-
-
 /*main section starts here*/
 
 .main {
@@ -109,37 +24,21 @@ hr{
 
 /* buttons */
 
-/* .float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:45px;
-	left:50px;
+.new{
 	background-color:#0C9;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
 }
 
-.float:hover{
+.new:hover{
     color:#FFF;
-} */
+} 
 
 /* .my-float{
 	margin-top:22px;
 } */
 
-/* .delete {
-	width:60px;
-	height:60px;
-	bottom:45px;
+.delete {
 	background-color:#fb8500;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-} */
+}
 
 .delete:hover{
     color: #fff;
@@ -173,36 +72,18 @@ hr{
     color: #fff;
 }
 
-/* .open {
-    position:fixed;
-	width:60px;
-	height:60px;
-	bottom:45px;
-	left:350px;
+.open {
 	background-color:#ef233c;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-} */
+}
 
 .open:hover{
     color: #fff;
 }
 
-/* .save {
-    position:fixed;
-	width:60px;
-	height:60px;
-	bottom:45px;
-	left:250px; 
-	background-color:#9d4edd;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-    box-shadow: 2px 2px 3px #999;
-    outline: 0;
-} */
+.save {
+    background-color:#9d4edd;
+    color: #fff;
+}
 
 .save:hover{
     color: #fff;
@@ -223,6 +104,7 @@ hr{
     height: 80px;
     left: 50%;
     transform: translate(-50%, 0);
+    box-shadow: 2px 2px 3px #999;
 }
 
 .bottom-btn {
@@ -231,9 +113,12 @@ hr{
     /* margin: 10px 10px; */
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 10px;
-    background-color: green !important;
+    padding: 15px;
+    display: inline-block;
     border-radius: 50px !important;
+    color:#FFF;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
 }
 
 .dropup {
