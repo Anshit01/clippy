@@ -46,7 +46,7 @@ $(document).ready( () => {
                 var email = result.user.email
                 var uid = result.user.uid
                 photoURL = result.user.photoURL
-                socket.emit('login', name, email, uid)
+                socket.emit('login', name, email, uid, photoURL)
                 console.log('logged in')
             }).catch(function(error) {
                 // Handle Errors here.
@@ -79,7 +79,7 @@ $(document).ready( () => {
         console.log('connected with connectionId: ' + connectionId)
     })
 
-    socket.on('login_response', (err, id, name, email, clipList, recentClipId) => {
+    socket.on('login_response', (err, id, name, email, clipList, recentClipId, photo_URL) => {
         console.log('logged in finally')
         if(err){
             console.error('error in login to backend')
@@ -88,6 +88,7 @@ $(document).ready( () => {
             userId = id
             userName = name
             userEmail = email
+            photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
             $('#login-btn').html('Log out')
             
@@ -124,14 +125,14 @@ $(document).ready( () => {
         }
     })
 
-    socket.on('clip_response', (err, clip_id, clip_name, ClipData) => {
+    socket.on('clip_response', (err, clip_id, clip_name, clipData) => {
         if(err){
             console.error(err)
         }else{
             clipName = clip_name
             clipId = clip_id
             $('#clip-name').val(clipName)
-            if(ClipData){
+            if(clipData){
                 $('#textarea').val(clipData)
             }
         }
@@ -146,7 +147,7 @@ $(document).ready( () => {
         var curText = $('#textarea').val()
         var curName = $('#clip-name').val()
         if(curText != textareaText || curName != clipName) {
-            socket.emit('update_text', connectionId, userId, clipId, clipName, curText, getPreciseCurrentTime())
+            socket.emit('update_text', connectionId, userId, clipId, curName, curText, getPreciseCurrentTime())
             textareaText = curText
             clipName = curName
         }
