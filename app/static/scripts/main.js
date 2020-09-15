@@ -2,11 +2,15 @@ document.getElementById('textarea').innerHTML = "Helloafsdf"
 var curTime = getCurrentTime()
 var lastUpdateTime = getPreciseCurrentTime()
 var textareaText = ''
-var connection_id = ''
-var user_id = ''
+
+var connectionId = ''
+var userId = ''
 var user_name = ''
 var user_email = ''
 var photoURL = ''
+
+var clipId = ''
+var clipName = 'Untitled'
 
 // Firebase configuration
 var firebaseConfig = {
@@ -22,8 +26,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var provider = new firebase.auth.GoogleAuthProvider();
-
-var res
 
 var socket
 $(document).ready( () => {
@@ -44,8 +46,7 @@ $(document).ready( () => {
                 var email = result.user.email
                 var uid = result.user.uid
                 photoURL = result.user.photoURL
-                socket.emit('login', name, email, uid)
-                res = result
+                socket.emit('login', name, email, uid, photoURL)
                 console.log('logged in')
             }).catch(function(error) {
                 // Handle Errors here.
@@ -55,7 +56,6 @@ $(document).ready( () => {
                 var email = error.email;
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
-                res = error
                 console.log('error in login')
             });
         }else{
@@ -75,19 +75,20 @@ $(document).ready( () => {
     })
 
     socket.on('connect_response', (con_id) => {
-        connection_id = con_id
-        console.log('connected with connection_id: ' + connection_id)
+        connectionId = con_id
+        console.log('connected with connectionId: ' + connectionId)
     })
 
-    socket.on('login_response', (err, id, name, email, clipList) => {
+    socket.on('login_response', (err, id, name, email, clipList, recentClipId, photo_URL) => {
         console.log('logged in finally')
         if(err){
             console.error('error in login to backend')
             console.error(err)
         }else{
-            user_id = id
-            user_name = name
-            user_email = email
+            userId = id
+            userName = name
+            userEmail = email
+            photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
             $('#login-btn').html('Log out')
             
@@ -103,6 +104,8 @@ $(document).ready( () => {
                 i++
             }
             $('#recent-clip-list').html(content)
+
+            socket.emit('get_clip', recentClipId)
         }
     })
 
@@ -116,12 +119,24 @@ $(document).ready( () => {
     })
 
     socket.on('text_response', (con_id, text, timestamp) => {
-        if(connection_id != con_id && timestamp > lastUpdateTime){
+        if(connectionId != con_id && timestamp > lastUpdateTime){
             textareaText = text
             $('#textarea').val(text)
         }
     })
 
+    socket.on('clip_response', (err, clip_id, clip_name, clipData) => {
+        if(err){
+            console.error(err)
+        }else{
+            clipName = clip_name
+            clipId = clip_id
+            $('#clip-name').val(clipName)
+            if(clipData){
+                $('#textarea').val(clipData)
+            }
+        }
+    })
 
     // $('#textarea').on('input', () => {
     //     text = $('#textarea').val()
@@ -130,9 +145,11 @@ $(document).ready( () => {
     
     setInterval(() => {
         var curText = $('#textarea').val()
-        if(curText != textareaText){
-            socket.emit('update_text', connection_id, curText, getPreciseCurrentTime())
+        var curName = $('#clip-name').val()
+        if(curText != textareaText || curName != clipName) {
+            socket.emit('update_text', connectionId, userId, clipId, curName, curText, getPreciseCurrentTime())
             textareaText = curText
+            clipName = curName
         }
     }, 1000)
 
