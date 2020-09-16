@@ -1,25 +1,30 @@
 from flask import Flask, render_template, request, jsonify, session
 from flask_socketio import SocketIO, send, emit
+from flask_session import Session
 from pymongo import MongoClient
 import uuid
 import time
 
 from app import config
 
-
-app = Flask(__name__)
-
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 #############WARNING: remove in production
-app.secret_key = config.APP_SECRET_KEY
-
-socketio = SocketIO(app)
-socketio.init_app(app, cors_allowed_origins="*") ########### WARNING: remove in production
-
 cluster = MongoClient(f'mongodb+srv://{config.DB_USERNAME}:{config.DB_PASSWORD}@cluster0.erdus.mongodb.net/database?retryWrites=true&w=majority')
 database = cluster['database']
 users_collection = database.users
 clip_list_collection = database.clip_list
 clips_collection = database.clips
+
+app = Flask(__name__)
+
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 ############# WARNING: remove in production
+app.secret_key = config.APP_SECRET_KEY
+
+app.config['SESSION_TYPE'] = 'mongodb'
+app.config['SESSION_MONGODB'] = cluster
+Session(app)
+
+socketio = SocketIO(app, manage_session=False)
+socketio.init_app(app, cors_allowed_origins="*") ########### WARNING: remove in production
+
 
 
 @app.route('/')
@@ -47,7 +52,7 @@ def handle_connect():
             name = user_data['name']
             email = user_data['email']
             recent_clip_id = user_data['recent_clip_id']
-            clip_list = clip_list_collection.find({'_id': id})
+            clip_list = dict(clip_list_collection.find({'_id': id}))
             if clip_list:
                 clip_list.pop('_id')
         else:
@@ -69,6 +74,7 @@ def handle_login(name, email, uid, photo_URL):
             recent_clip_id = user['recent_clip_id']
             clip_list = clip_list_collection.find_one({'_id': id})
             clip_list.pop('_id')
+            login(id, name, email, photo_URL)
         else:
             print('attempt to login with wrong credentials')
             err = 'Invalid Credentials'
