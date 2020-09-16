@@ -59,6 +59,7 @@ $(document).ready( () => {
                 console.log('error in login')
             });
         }else{
+            socket.emit('logout')
             firebase.auth().signOut().then(function() {
                 console.log('Signed out')
                 $('#login-btn').html('Login')
@@ -105,7 +106,7 @@ $(document).ready( () => {
             }
             $('#recent-clip-list').html(content)
 
-            socket.emit('get_clip', recentClipId)
+            socket.emit('get_clip', userId, recentClipId)
         }
     })
 
@@ -135,6 +136,14 @@ $(document).ready( () => {
             if(clipData){
                 $('#textarea').val(clipData)
             }
+        }
+    })
+
+    socket.on('logout_response', (err, res) => {
+        if(err){
+            console.error(err)
+        }else{
+            console.log(res)
         }
     })
 
