@@ -14,7 +14,6 @@ body {
 }
 
 .text-field { 
-    /* padding: 50px;  main text area starts her */
     position: absolute;
     padding-bottom: 120px !important;
     resize: none;
@@ -67,24 +66,21 @@ body {
     background-color: #e9ecef;
     position:fixed;
     bottom: 40px;
-    /* width: 750px; */
     height: 80px;
     left: 50%;
     transform: translate(-50%, 0);
-    /* box-shadow: 2px 2px 3px #999; */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .bottom-bar:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
     transform: translate(-50%, -5px);
 }
 
 .bottom-btn {
     width: 60px;
     height: 60px;
-    /* margin: 10px 10px; */
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 15px;
@@ -92,8 +88,6 @@ body {
     border-radius: 50px !important;
     color:#FFF;
     text-align:center;
-    /* box-shadow: 2px 2px 3px #999; */
-    /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); */
     transition: transform 0.3s;
 }
 
@@ -108,34 +102,14 @@ body {
 /***************************************** top bar css starts here*********************************/
 
 
-.login {
-    font-size: 20px;
-    color: #fff;
-    background-color: #0f4c5c;
-    border-radius: 5px;
-    padding: 5px 15px 5px 15px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    letter-spacing: 2px;
-    /* width: 135px; */
-    
-}
-
-.login:hover{
-    color: #fff;
-}
-
 .user{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-left: 1px;
-    margin-right: 10px;
 }
 
 .sync {
     color: #000000;
-    margin-top: 20px;
 }
 
 .sync:hover{
@@ -148,6 +122,47 @@ body {
 }
 
 
-.navbar h1 {
-    letter-spacing: 2px;
+.bd-highlight{
+     background-color: #edf6f9;
 }
+
+input{
+    border-radius: 5px;
+    border-color: #e5e5e5;
+    width: 100px;
+}
+
+input[type=text]{
+    text-align: center;
+}
+
+/******************************************user modal******************************/
+
+
+.logout {
+    font-size: 20px;
+    color: #fff;
+    background-color: #0f4c5c;
+    border-radius: 20px;
+    padding: 5px 15px 5px 15px;
+    letter-spacing: 2px;
+    margin-left: 28%;
+}
+
+.logout:hover{
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.user-name{
+    font-weight: 400;
+    font-size: 26px;
+    margin-top: 15px;
+}
+
+.email-id {
+    margin-bottom: 30px;
+}
+
+
