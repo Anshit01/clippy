@@ -43,6 +43,7 @@ def handle_connect():
     if is_loggedin():
         err = ''
         id = session['user_id']
+        join_room(id)
         name = ''
         email = ''
         recent_clip_id = ''

@@ -69,12 +69,12 @@ body {
     height: 80px;
     left: 50%;
     transform: translate(-50%, 0);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .bottom-bar:hover {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
     transform: translate(-50%, -5px);
 }
 

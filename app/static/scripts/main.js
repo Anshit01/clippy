@@ -1,4 +1,4 @@
-document.getElementById('textarea').innerHTML = "Helloafsdf"
+// document.getElementById('textarea').innerHTML = "Helloafsdf"
 var curTime = getCurrentTime()
 var lastUpdateTime = getPreciseCurrentTime()
 var textareaText = ''
@@ -38,6 +38,24 @@ $(document).ready( () => {
     $(window).on('resize', () => {
         $('#textarea').outerHeight($(document).height() - $('#textarea').offset().top)
     })
+
+    $('#new-btn').click(() => {
+        var clipsArray = []
+        $('.recent-clip').each(function() {
+            clipsArray.push($(this).html())
+        })
+        var newClipName = 'Untitled'
+        if(clipsArray.indexOf(newClipName) != -1){
+            var ind = 1
+            while(clipsArray.indexOf(newClipName + '-' + ind) != -1){
+                ind++
+            }
+            newClipName += '-' + ind
+        }
+        socket.emit('new_clip', userId, newClipName)
+    })
+
+    
 
     $('#login-btn').click(() => {
         if($('#login-btn').html() == 'Login'){
@@ -136,6 +154,22 @@ $(document).ready( () => {
             if(clipData){
                 $('#textarea').val(clipData)
             }
+        }
+    })
+
+    socket.on('new_clip_response', (err, newClipId, newClipName) => {
+        if(err){
+            console.error(err)
+        }else{
+            clipId = newClipId
+            clipName = newClipName
+            $('#clip-name').val(clipName)
+            $('#textarea').val('')
+            $('#recent-clip-list').html(
+                '<a id="' + clipId + '" class="dropdown-item recent-clip">' + clipName + '</a>'
+                + '<div class="dropdown-divider"></div>'
+                + $('#recent-clip-list').html()
+            )
         }
     })
 
