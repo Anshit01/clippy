@@ -39,6 +39,10 @@ $(document).ready( () => {
         $('#textarea').outerHeight($(document).height() - $('#textarea').offset().top)
     })
 
+    $('#new-btn').click(() => {
+        
+    })
+
     $('#login-btn').click(() => {
         if($('#login-btn').html() == 'Login'){
             firebase.auth().signInWithPopup(provider).then(function(result) {
