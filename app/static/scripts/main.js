@@ -55,7 +55,10 @@ $(document).ready( () => {
         socket.emit('new_clip', userId, newClipName)
     })
 
-    
+    $('.recent-clip').on('click', function() {
+        var selectedClipId = $(this).attr('id')
+        socket.emit('get_clip', userId, selectedClipId)
+    })
 
     $('#login-btn').click(() => {
         if($('#login-btn').html() == 'Login'){
@@ -109,6 +112,7 @@ $(document).ready( () => {
             userEmail = email
             photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
+            $('#profile-img-lg').attr('src', photoURL)
             $('#login-btn').html('Log out')
             
             //filling recent clips drop down list
@@ -123,7 +127,10 @@ $(document).ready( () => {
                 i++
             }
             $('#recent-clip-list').html(content)
-
+            $('.recent-clip').on('click', function() {
+                var selectedClipId = $(this).attr('id')
+                socket.emit('get_clip', userId, selectedClipId)
+            })
             socket.emit('get_clip', userId, recentClipId)
         }
     })
@@ -151,9 +158,7 @@ $(document).ready( () => {
             clipName = clip_name
             clipId = clip_id
             $('#clip-name').val(clipName)
-            if(clipData){
-                $('#textarea').val(clipData)
-            }
+            $('#textarea').val(clipData)
         }
     })
 
@@ -170,6 +175,10 @@ $(document).ready( () => {
                 + '<div class="dropdown-divider"></div>'
                 + $('#recent-clip-list').html()
             )
+            $('.recent-clip').on('click', function() {
+                var selectedClipId = $(this).attr('id')
+                socket.emit('get_clip', userId, selectedClipId)
+            })
         }
     })
 
