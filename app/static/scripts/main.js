@@ -60,34 +60,11 @@ $(document).ready( () => {
         socket.emit('get_clip', userId, selectedClipId)
     })
 
-    $('#login-btn').click(() => {
-        if($('#login-btn').html() == 'Login'){
-            firebase.auth().signInWithPopup(provider).then(function(result) {
-                var name = result.user.displayName
-                var email = result.user.email
-                var uid = result.user.uid
-                photoURL = result.user.photoURL
-                socket.emit('login', name, email, uid, photoURL)
-                console.log('logged in')
-            }).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-                console.log('error in login')
-            });
+    $('#login-btn, #google-signin').click(() => {
+        if($('#login-btn').html() == 'Sign in'){
+            login()
         }else{
-            socket.emit('logout')
-            firebase.auth().signOut().then(function() {
-                console.log('Signed out')
-                $('#login-btn').html('Login')
-                $('#profile-img').attr('src', '/static/styles/images/user.png')
-            }).catch(function(error) {
-                console.error('Sign out error')
-            });
+            logout()
         }
     })
 
@@ -132,6 +109,7 @@ $(document).ready( () => {
                 socket.emit('get_clip', userId, selectedClipId)
             })
             socket.emit('get_clip', userId, recentClipId)
+            showLandingPage(false)
         }
     })
 
@@ -187,6 +165,9 @@ $(document).ready( () => {
             console.error(err)
         }else{
             console.log(res)
+            $('#login-btn').html('Sign in')
+            $('#profile-img').attr('src', '/static/styles/images/user.png')
+            showLandingPage(true)
         }
     })
 
@@ -206,6 +187,45 @@ $(document).ready( () => {
     }, 1000)
 
 })
+
+function login() {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        var name = result.user.displayName
+        var email = result.user.email
+        var uid = result.user.uid
+        photoURL = result.user.photoURL
+        socket.emit('login', name, email, uid, photoURL)
+        console.log('logged in')
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.log('error in login')
+    });
+}
+
+function logout() {
+    socket.emit('logout')
+    firebase.auth().signOut().then(function() {
+        console.log('Signed out from firebase')
+    }).catch(function(error) {
+        console.error('Sign out error')
+    });
+}
+
+function showLandingPage(show) {
+    if(show){
+        $('.landing-page').fadeIn()
+        $('.whole').fadeOut()
+    }else{
+        $('.whole').fadeIn()
+        $('.landing-page').fadeOut()
+    }
+}
 
 function getCurrentTime() {
     return Math.floor(new Date().getTime() / 1000)
