@@ -270,14 +270,14 @@ body {
 }
 
 .landing-img{
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     margin-top: 20%;
 }
 
 .subheading{
-    font-size: 36px;
+    font-size: 28px;
     font-family: 'Poppins', sans-serif;
-    color: #333333;
-    font-weight: 500;
+    color: #6E6D7A;
+    font-weight: 600;
 }
