@@ -12,6 +12,7 @@ pymongo = "*"
 dnspython = "*"
 flask-socketio = "*"
 eventlet = "*"
+flask-session = "*"
 
 [requires]
 python_version = "3.8"
