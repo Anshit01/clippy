@@ -90,7 +90,7 @@ $(document).ready( () => {
             photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
             $('#profile-img-lg').attr('src', photoURL)
-            $('#login-btn').html('Log out')
+            $('#login-btn').html('Logout')
             
             //filling recent clips drop down list
             var clipLength = Object.keys(clipList).length

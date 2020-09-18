@@ -7,6 +7,10 @@ body {
 .whole{
     display: none;
 }
+
+.fav{
+    width: 20px;
+}
 /**********************************main section starts here*********************************************/
 
 .main {
@@ -159,13 +163,16 @@ input{
     border-radius: 20px;
     padding: 5px 16px;
     letter-spacing: 2px;
-    
 }
 
 .logout:hover{
     color: #fff;
     cursor: pointer;
     text-decoration: none;
+}
+
+.user{
+    cursor: pointer;
 }
 
 .user-name{
@@ -242,6 +249,7 @@ body {
 
   .google-btn:hover {
     box-shadow: 0 0 6px #4285f4;
+    cursor: pointer;
   }
 
   .google-btn:active {
