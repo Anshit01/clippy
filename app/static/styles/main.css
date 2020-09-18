@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.whole{
+    display: none;
+}
 /**********************************main section starts here*********************************************/
 
 .main {
@@ -182,4 +186,98 @@ input{
     margin: 16px auto;
 }
 
+/******************************* overlay screen|landing page *****************************/
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:500');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0px !important;
+    padding: 0px !important;
+    position: static;
+}
+
+.landing-page{
+    height: 100vh !important;
+    width: 100vw !important;
+    background-color: #edf6f9;
+    padding-left: 130px;
+}
+
+.google-btn {
+  width: 184px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  margin-top: 5%;
+}
+
+  .google-btn .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  .google-btn .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .google-btn .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+
+  .google-btn:hover {
+    box-shadow: 0 0 6px #4285f4;
+  }
+
+  .google-btn:active {
+    background: #1669F2;
+  }
+
+
+.overlay-heading{
+    font-size: 50px;
+    font-family: 'Poppins', sans-serif;
+    color: #333333;
+    font-weight: 600;
+}
+
+.overlay-text{
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 5%;
+    color: #6E6D7A;
+    padding-right: 25%;  
+    font-weight: 400; 
+}
+
+.text_column{
+    padding-top: 12%;
+}
+
+.landing-img{
+    width: 70%;
+    height: 70%;
+    margin-top: 20%;
+}
+
+.subheading{
+    font-size: 36px;
+    font-family: 'Poppins', sans-serif;
+    color: #333333;
+    font-weight: 500;
+}
