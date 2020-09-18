@@ -73,12 +73,12 @@ body {
     height: 80px;
     left: 50%;
     transform: translate(-50%, 0);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .bottom-bar:hover {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
     transform: translate(-50%, -5px);
 }
 
@@ -103,6 +103,14 @@ body {
     display: inline;
 }
 
+.recent-clip {
+    transition: font-size 0.2s;
+}
+
+.recent-clip:hover {
+    font-size: 1.1em;
+}
+
 /***************************************** top bar css starts here*********************************/
 
 
@@ -113,18 +121,22 @@ body {
 }
 
 .sync {
-    color: #000000;
+    color: #4BB543;
 }
 
 .sync:hover{
-    color: #000000;
-}
-
-.sync:focus{
-    outline: 0;
     text-decoration: none;
+    color: #4BB543;
+    
 }
 
+.sync-icon {
+    transition: transform 0.2s;
+}
+
+.sync-icon:hover {
+    transform: rotate(120deg);
+}
 
 .bd-highlight{
      background-color: #edf6f9;
@@ -133,12 +145,9 @@ body {
 input{
     border-radius: 5px;
     border-color: #e5e5e5;
-    width: 100px;
+    max-width: 300px;
 }
 
-input[type=text]{
-    text-align: center;
-}
 
 /******************************************user modal******************************/
 
@@ -148,9 +157,9 @@ input[type=text]{
     color: #fff;
     background-color: #0f4c5c;
     border-radius: 20px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 16px;
     letter-spacing: 2px;
-    margin-left: 28%;
+    
 }
 
 .logout:hover{
@@ -167,6 +176,14 @@ input[type=text]{
 
 .email-id {
     margin-bottom: 30px;
+}
+
+#profile-img-lg {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 16px auto;
 }
 
 /******************************* overlay screen|landing page *****************************/

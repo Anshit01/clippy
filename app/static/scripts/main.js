@@ -1,4 +1,4 @@
-document.getElementById('textarea').innerHTML = "Helloafsdf"
+// document.getElementById('textarea').innerHTML = "Helloafsdf"
 var curTime = getCurrentTime()
 var lastUpdateTime = getPreciseCurrentTime()
 var textareaText = ''
@@ -39,6 +39,27 @@ $(document).ready( () => {
         $('#textarea').outerHeight($(document).height() - $('#textarea').offset().top)
     })
 
+    $('#new-btn').click(() => {
+        var clipsArray = []
+        $('.recent-clip').each(function() {
+            clipsArray.push($(this).html())
+        })
+        var newClipName = 'Untitled'
+        if(clipsArray.indexOf(newClipName) != -1){
+            var ind = 1
+            while(clipsArray.indexOf(newClipName + '-' + ind) != -1){
+                ind++
+            }
+            newClipName += '-' + ind
+        }
+        socket.emit('new_clip', userId, newClipName)
+    })
+
+    $('.recent-clip').on('click', function() {
+        var selectedClipId = $(this).attr('id')
+        socket.emit('get_clip', userId, selectedClipId)
+    })
+
     $('#login-btn').click(() => {
         if($('#login-btn').html() == 'Login'){
             firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -59,6 +80,7 @@ $(document).ready( () => {
                 console.log('error in login')
             });
         }else{
+            socket.emit('logout')
             firebase.auth().signOut().then(function() {
                 console.log('Signed out')
                 $('#login-btn').html('Login')
@@ -90,6 +112,7 @@ $(document).ready( () => {
             userEmail = email
             photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
+            $('#profile-img-lg').attr('src', photoURL)
             $('#login-btn').html('Log out')
             
             //filling recent clips drop down list
@@ -104,8 +127,11 @@ $(document).ready( () => {
                 i++
             }
             $('#recent-clip-list').html(content)
-
-            socket.emit('get_clip', recentClipId)
+            $('.recent-clip').on('click', function() {
+                var selectedClipId = $(this).attr('id')
+                socket.emit('get_clip', userId, selectedClipId)
+            })
+            socket.emit('get_clip', userId, recentClipId)
         }
     })
 
@@ -132,9 +158,35 @@ $(document).ready( () => {
             clipName = clip_name
             clipId = clip_id
             $('#clip-name').val(clipName)
-            if(clipData){
-                $('#textarea').val(clipData)
-            }
+            $('#textarea').val(clipData)
+        }
+    })
+
+    socket.on('new_clip_response', (err, newClipId, newClipName) => {
+        if(err){
+            console.error(err)
+        }else{
+            clipId = newClipId
+            clipName = newClipName
+            $('#clip-name').val(clipName)
+            $('#textarea').val('')
+            $('#recent-clip-list').html(
+                '<a id="' + clipId + '" class="dropdown-item recent-clip">' + clipName + '</a>'
+                + '<div class="dropdown-divider"></div>'
+                + $('#recent-clip-list').html()
+            )
+            $('.recent-clip').on('click', function() {
+                var selectedClipId = $(this).attr('id')
+                socket.emit('get_clip', userId, selectedClipId)
+            })
+        }
+    })
+
+    socket.on('logout_response', (err, res) => {
+        if(err){
+            console.error(err)
+        }else{
+            console.log(res)
         }
     })
 
