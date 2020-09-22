@@ -91,6 +91,8 @@ $(document).ready( () => {
             photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
             $('#profile-img-lg').attr('src', photoURL)
+            $('#user-name').text(name)
+            $('#user-email').text(email)
             $('#login-btn').html('Logout')
             
             //filling recent clips drop down list
