@@ -53,11 +53,13 @@ $(document).ready( () => {
             }
             newClipName += '-' + ind
         }
+        showLoading()
         socket.emit('new_clip', userId, newClipName)
     })
 
     $('.recent-clip').on('click', function() {
         var selectedClipId = $(this).attr('id')
+        showLoading()
         socket.emit('get_clip', userId, selectedClipId)
     })
 
@@ -91,6 +93,8 @@ $(document).ready( () => {
             photoURL = photo_URL
             $('#profile-img').attr('src', photoURL)
             $('#profile-img-lg').attr('src', photoURL)
+            $('#user-name').text(name)
+            $('#user-email').text(email)
             $('#login-btn').html('Logout')
             
             //filling recent clips drop down list
@@ -107,9 +111,11 @@ $(document).ready( () => {
             $('#recent-clip-list').html(content)
             $('.recent-clip').on('click', function() {
                 var selectedClipId = $(this).attr('id')
+                showLoading()
                 socket.emit('get_clip', userId, selectedClipId)
             })
             setClip(recentClipId, clip_name, clip_data)
+            hideLoading()
             showLandingPage(false)
         }
     })
@@ -134,6 +140,7 @@ $(document).ready( () => {
         if(err){
             console.error(err)
         }else{
+            hideLoading()
             setClip(clip_id, clip_name, clip_data)
         }
     })
@@ -150,9 +157,11 @@ $(document).ready( () => {
             )
             $('.recent-clip').on('click', function() {
                 var selectedClipId = $(this).attr('id')
+                showLoading()
                 socket.emit('get_clip', userId, selectedClipId)
             })
         }
+        hideLoading()
     })
 
     socket.on('logout_response', (err, res) => {
@@ -160,6 +169,12 @@ $(document).ready( () => {
             console.error(err)
         }else{
             console.log(res)
+            userId = ''
+            user_name = ''
+            user_email = ''
+            photoURL = ''
+            clipId = ''
+            clipName = 'Untitled'
             $('#login-btn').html('Sign in')
             $('#profile-img').attr('src', '/static/styles/images/user.png')
             showLandingPage(true)
@@ -174,7 +189,7 @@ $(document).ready( () => {
     setInterval(() => {
         var curText = $('#textarea').val()
         var curName = $('#clip-name').val()
-        if(curText != textareaText || curName != clipName) {
+        if(userId != '' && (curText != textareaText || curName != clipName)) {
             socket.emit('update_text', connectionId, userId, clipId, curName, curText, getPreciseCurrentTime())
             textareaText = curText
             clipName = curName
@@ -192,7 +207,6 @@ function login() {
         socket.emit('login', name, email, uid, photoURL)
         console.log('logged in')
     }).catch(function(error) {
-        // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // The email of the user's account used.
@@ -231,11 +245,11 @@ function getPreciseCurrentTime() {
 }
 
 function showLoading() {
-
+    $('#loader').removeClass('hidden')
 }
 
 function hideLoading() {
-
+    $('#loader').addClass('hidden')
 
     $('#textarea').focus();
 }

@@ -71,6 +71,8 @@ def handle_login(name, email, uid, photo_URL):
     user = users_collection.find_one({'email': email})
     err = None
     recent_clip_id = ''
+    clip_name = ''
+    clip_data = ''
     clip_list = {}
     if user:
         if uid == user['uid']:
@@ -104,6 +106,7 @@ def handle_login(name, email, uid, photo_URL):
         })
         print('user added')
         login(id, name, email, photo_URL)
+    if err is None:
         e, clip_name, clip_data = get_clip(recent_clip_id)
     emit('login_response', (err, id, name, email, clip_list,photo_URL, recent_clip_id, clip_name, clip_data))
 
@@ -145,13 +148,16 @@ def handle_new_clip(user_id, clip_name):
 
 @socketio.on('get_clip')
 def handle_get_clip(user_id, clip_id):
-    clip_doc = clips_collection.find_one({'_id': clip_id})
     user_doc = users_collection.find_one({'_id': user_id})
     err = ''
     clip_name = ''
     clip_data = ''
     if user_doc:
         err, clip_name, clip_data = get_clip(clip_id)
+        users_collection.update_one(
+            {'_id': user_id},
+            {'$set': {'recent_clip_id': clip_id}}
+        )
     else:
         err = 'Invalid User ID'
     emit('clip_response', (err, clip_id, clip_name, clip_data))
@@ -161,15 +167,16 @@ def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
     print('User_id: ' + user_id)
     print('Room:' + str(rooms()))
     print('Text: ' + text)
-    clips_collection.update_one(
-        {'_id': clip_id},
-        {'$set': {'clip_name': clip_name, 'data': text}}
-    )
-    clip_list_collection.update_one(
-        {'_id': user_id},
-        {'$set': {clip_id: clip_name}}
-    )
-    emit('text_response', (connection_id, text, timestamp), room=user_id)
+    if is_loggedin():
+        clips_collection.update_one(
+            {'_id': clip_id},
+            {'$set': {'clip_name': clip_name, 'data': text}}
+        )
+        clip_list_collection.update_one(
+            {'_id': user_id},
+            {'$set': {clip_id: clip_name}}
+        )
+        emit('text_response', (connection_id, text, timestamp), room=user_id)
 
 
 
