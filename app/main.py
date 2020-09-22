@@ -148,13 +148,16 @@ def handle_new_clip(user_id, clip_name):
 
 @socketio.on('get_clip')
 def handle_get_clip(user_id, clip_id):
-    clip_doc = clips_collection.find_one({'_id': clip_id})
     user_doc = users_collection.find_one({'_id': user_id})
     err = ''
     clip_name = ''
     clip_data = ''
     if user_doc:
         err, clip_name, clip_data = get_clip(clip_id)
+        users_collection.update_one(
+            {'_id': user_id},
+            {'$set': {'recent_clip_id': clip_id}}
+        )
     else:
         err = 'Invalid User ID'
     emit('clip_response', (err, clip_id, clip_name, clip_data))
