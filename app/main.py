@@ -62,7 +62,8 @@ def handle_connect():
         else:
             err = 'Invalid Credentials'
         photo_URL = session['photo_URL']
-        emit('login_response', (err, id, name, email, clip_list, recent_clip_id, photo_URL))
+        e, clip_name, clip_data = get_clip(recent_clip_id)
+        emit('login_response', (err, id, name, email, clip_list, photo_URL, recent_clip_id, clip_name, clip_data))
 
 @socketio.on('login')
 def handle_login(name, email, uid, photo_URL):
@@ -103,7 +104,8 @@ def handle_login(name, email, uid, photo_URL):
         })
         print('user added')
         login(id, name, email, photo_URL)
-    emit('login_response', (err, id, name, email, clip_list, recent_clip_id, photo_URL))
+        e, clip_name, clip_data = get_clip(recent_clip_id)
+    emit('login_response', (err, id, name, email, clip_list,photo_URL, recent_clip_id, clip_name, clip_data))
 
 @socketio.on('logout')
 def handle_logout():
@@ -148,11 +150,8 @@ def handle_get_clip(user_id, clip_id):
     err = ''
     clip_name = ''
     clip_data = ''
-    if clip_doc and user_doc:
-        clip_name = clip_doc['clip_name']
-        clip_data = clip_doc['data']
-    elif user_doc:
-        err = 'Invalid clip ID'
+    if user_doc:
+        err, clip_name, clip_data = get_clip(clip_id)
     else:
         err = 'Invalid User ID'
     emit('clip_response', (err, clip_id, clip_name, clip_data))
@@ -166,7 +165,25 @@ def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
         {'_id': clip_id},
         {'$set': {'clip_name': clip_name, 'data': text}}
     )
+    clip_list_collection.update_one(
+        {'_id': user_id},
+        {'$set': {clip_id: clip_name}}
+    )
     emit('text_response', (connection_id, text, timestamp), room=user_id)
+
+
+
+def get_clip(clip_id):
+    clip_doc = clips_collection.find_one({'_id': clip_id})
+    err = ''
+    clip_name = ''
+    clip_data = ''
+    if clip_doc:
+        clip_name = clip_doc['clip_name']
+        clip_data = clip_doc['data']
+    else:
+        err = 'Invalid clip ID'
+    return (err, clip_name, clip_data)
 
 def login(user_id, name, email, photo_URL):
     session['user_id'] = user_id
