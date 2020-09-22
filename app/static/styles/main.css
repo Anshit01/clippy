@@ -4,10 +4,6 @@ body {
     padding: 0;
 }
 
-/* .whole{
-    display: none;
-} */
-
 .hidden {
     display: none;
 }
@@ -88,6 +84,7 @@ body {
     transform: translate(-50%, 0);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s, transform 0.3s;
+    width: 500px;
 }
 
 .bottom-bar:hover {
@@ -106,6 +103,7 @@ body {
     color:#FFF;
     text-align:center;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .bottom-btn:hover {
@@ -124,6 +122,13 @@ body {
     font-size: 1.1em;
 }
 
+@media only screen and (max-width: 600px){
+    .bottom-bar{
+        width: 300px;
+    }
+}
+
+
 /***************************************** top bar css starts here*********************************/
 
 
@@ -140,6 +145,7 @@ body {
 .sync:hover{
     text-decoration: none;
     color: #4BB543;
+    cursor: pointer;
     
 }
 
@@ -159,6 +165,12 @@ input{
     border-radius: 5px;
     border-color: #e5e5e5;
     max-width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+    input{
+        max-width: 150px;
+    }
 }
 
 
@@ -217,7 +229,6 @@ body {
     height: 100vh !important;
     width: 100vw !important;
     background-color: #edf6f9;
-    /* padding-left: 130px; */
 }
 
 .google-btn {
@@ -276,21 +287,8 @@ body {
 .overlay-text{
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    /* margin-top: 5%; */
     color: #6E6D7A;
-    /* padding-right: 25%;   */
     font-weight: 400; 
-}
-
-.text_column{
-    /* padding-top: 12%; */
-}
-
-.landing-img{
-    /* width: 80%;
-    height: 80%; */
-    /* margin-top: 20%; */
-    /* padding-top: 20% ; */
 }
 
 .subheading{
