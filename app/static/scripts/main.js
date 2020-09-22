@@ -176,7 +176,8 @@ $(document).ready( () => {
             clipId = ''
             clipName = 'Untitled'
             $('#login-btn').html('Sign in')
-            $('#profile-img').attr('src', '/static/styles/images/user.png')
+            $('#profile-img').removeAttr('src')
+            $('#profile-img-lg').removeAttr('src')
             showLandingPage(true)
         }
     })
