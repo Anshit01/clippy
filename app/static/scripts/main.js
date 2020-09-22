@@ -12,6 +12,7 @@ var photoURL = ''
 var clipId = ''
 var clipName = 'Untitled'
 
+
 // Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyBlkHqdolHzPDu7lYuAmPv7K1ImaPAr9Lk",
@@ -233,4 +234,14 @@ function getCurrentTime() {
 
 function getPreciseCurrentTime() {
     return new Date().getTime()
+}
+
+function showLoading() {
+
+}
+
+function hideLoading() {
+
+
+    $('#textarea').focus();
 }

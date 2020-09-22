@@ -17,7 +17,12 @@
 
 </head>
 <body> 
-    <div class="container-fluid landing-page ">
+    <div 
+        class="container-fluid landing-page
+        {% if loggedin %}
+        hidden
+        {% endif %}
+        ">
         <div class="row">
         
             <div class="col-md-5 text_column offset-md-1">
@@ -48,7 +53,13 @@
 
     </div>
 
-    <div class="whole">
+    <div 
+        class="whole
+        {% if loggedin == false %}
+        hidden
+        {% endif %}
+        "
+        >
 
         <div class="d-flex bd-highlight py-2">
 
@@ -83,8 +94,12 @@
             </div>
     
         </div>
+        
+        <div class="loading-bar">
+            <div id="loader" class="loader"></div>
+        </div>
 
-        <textarea id="textarea" style="min-width: 100%" class="form-control text-field"></textarea>
+        <textarea id="textarea" class="form-control"></textarea>
 
         <div class="row text-center">
 
@@ -125,8 +140,14 @@
        
     
 
-
     <!-- Javascript -->
+    <!-- <script>
+        var loggedIn = false
+        {% if loggedin %}
+            loggedIn = true
+        {% endif %}
+    </script> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>

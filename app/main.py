@@ -29,7 +29,10 @@ socketio.init_app(app, cors_allowed_origins="*") ########### WARNING: remove in 
 
 @app.route('/')
 def index_route():
-    return render_template('index.html')
+    if is_loggedin():
+        return render_template('index.html', loggedin=True)
+    else:
+        return render_template('index.html', loggedin=False)
 
 @socketio.on('message')
 def handle_message(msg):
