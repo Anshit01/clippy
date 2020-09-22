@@ -79,7 +79,7 @@ $(document).ready( () => {
         console.log('connected with connectionId: ' + connectionId)
     })
 
-    socket.on('login_response', (err, id, name, email, clipList, recentClipId, photo_URL) => {
+    socket.on('login_response', (err, id, name, email, clipList, photo_URL, recentClipId, clip_name, clip_data) => {
         console.log('logged in finally')
         if(err){
             console.error('error in login to backend')
@@ -109,7 +109,7 @@ $(document).ready( () => {
                 var selectedClipId = $(this).attr('id')
                 socket.emit('get_clip', userId, selectedClipId)
             })
-            socket.emit('get_clip', userId, recentClipId)
+            setClip(recentClipId, clip_name, clip_data)
             showLandingPage(false)
         }
     })
@@ -130,14 +130,11 @@ $(document).ready( () => {
         }
     })
 
-    socket.on('clip_response', (err, clip_id, clip_name, clipData) => {
+    socket.on('clip_response', (err, clip_id, clip_name, clip_data) => {
         if(err){
             console.error(err)
         }else{
-            clipName = clip_name
-            clipId = clip_id
-            $('#clip-name').val(clipName)
-            $('#textarea').val(clipData)
+            setClip(clip_id, clip_name, clip_data)
         }
     })
 
@@ -145,10 +142,7 @@ $(document).ready( () => {
         if(err){
             console.error(err)
         }else{
-            clipId = newClipId
-            clipName = newClipName
-            $('#clip-name').val(clipName)
-            $('#textarea').val('')
+            setClip(newClipId, newClipName, '')
             $('#recent-clip-list').html(
                 '<a id="' + clipId + '" class="dropdown-item recent-clip">' + clipName + '</a>'
                 + '<div class="dropdown-divider"></div>'
@@ -244,4 +238,11 @@ function hideLoading() {
 
 
     $('#textarea').focus();
+}
+
+function setClip(clip_id, clip_name, clip_data) {
+    clipName = clip_name
+    clipId = clip_id
+    $('#clip-name').val(clip_name)
+    $('#textarea').val(clip_data)
 }
