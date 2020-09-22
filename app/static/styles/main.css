@@ -4,7 +4,11 @@ body {
     padding: 0;
 }
 
-.whole{
+/* .whole{
+    display: none;
+} */
+
+.hidden {
     display: none;
 }
 
@@ -21,10 +25,15 @@ body {
     margin-left: 0;  
 }
 
-.text-field { 
+#textarea { 
     position: absolute;
     padding-bottom: 120px !important;
     resize: none;
+}
+
+#textarea, #textarea:focus, #textarea:active, #textarea:hover {
+    box-shadow: none;
+    border: none;
 }
 
 
@@ -289,3 +298,34 @@ body {
     color: #6E6D7A;
     font-weight: 600;
 }
+
+/*------------------------------------Loading--------------------------*/
+.loading-bar {
+    height: 5px;
+    overflow: hidden;
+    background-color: rgb(206, 233, 240);
+}
+
+@keyframes loading-bar-animation {
+    from {
+        left: 0%;
+        transform: translateX(-100%);
+    }
+    to {
+        left: 100%;
+        transform: translateX(0);
+    }
+}
+
+#loader {
+    height: 100%;
+    width: 20%;
+    position: relative;
+    background-color: rgb(88, 189, 219);
+    
+    animation-name: loading-bar-animation;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
