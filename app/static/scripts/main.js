@@ -162,6 +162,12 @@ $(document).ready( () => {
             console.error(err)
         }else{
             console.log(res)
+            userId = ''
+            user_name = ''
+            user_email = ''
+            photoURL = ''
+            clipId = ''
+            clipName = 'Untitled'
             $('#login-btn').html('Sign in')
             $('#profile-img').attr('src', '/static/styles/images/user.png')
             showLandingPage(true)
