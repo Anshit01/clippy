@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from flask_session import Session
 from pymongo import MongoClient
 import uuid
+import random
 import time
 
 from app import config
@@ -164,10 +165,12 @@ def handle_get_clip(user_id, clip_id):
 
 @socketio.on('update_text')
 def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
-    print('User_id: ' + user_id)
-    print('Room:' + str(rooms()))
-    print('Text: ' + text)
+    # print('User_id: ' + user_id)
+    # print('Room:' + str(rooms()))
+    # print('Text: ' + text)
     if is_loggedin():
+        if clip_name == '':
+            clip_name = 'clip-' + str(random.randint(11, 99))
         clips_collection.update_one(
             {'_id': clip_id},
             {'$set': {'clip_name': clip_name, 'data': text}}
@@ -176,7 +179,7 @@ def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
             {'_id': user_id},
             {'$set': {clip_id: clip_name}}
         )
-        emit('text_response', (connection_id, text, timestamp), room=user_id)
+        emit('text_response', (connection_id, text, clip_id, clip_name, timestamp), room=user_id)
 
 
 

@@ -129,11 +129,12 @@ $(document).ready( () => {
         console.log(json)
     })
 
-    socket.on('text_response', (con_id, text, timestamp) => {
+    socket.on('text_response', (con_id, text, clip_id, clip_name, timestamp) => {
         if(connectionId != con_id && timestamp > lastUpdateTime){
             textareaText = text
             $('#textarea').val(text)
         }
+        $('#' + clip_id).text(clip_name)
     })
 
     socket.on('clip_response', (err, clip_id, clip_name, clip_data) => {

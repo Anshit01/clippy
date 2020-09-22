@@ -131,6 +131,21 @@ body {
 
 /***************************************** top bar css starts here*********************************/
 
+.clip-name {
+    border: none;
+    border-bottom: 2px solid rgb(102, 180, 50);
+    border-radius: 0;
+    padding: 3px 8px;
+    background-color: inherit;
+    transition: padding-bottom 0.3s, margin-bottom 0.3s, border-bottom 0.3s;
+}
+
+.clip-name:focus, .clip-name:active, .clip-name:hover {
+    padding-bottom: 1px;
+    /* margin-bottom: 2px; */
+    border-bottom: 4px solid rgb(102, 180, 50);
+    outline: none;
+}
 
 .user{
     width: 50px;
