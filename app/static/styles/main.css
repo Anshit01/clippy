@@ -97,6 +97,7 @@ body {
     color:#FFF;
     text-align:center;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .bottom-btn:hover {
@@ -131,6 +132,7 @@ body {
 .sync:hover{
     text-decoration: none;
     color: #4BB543;
+    cursor: pointer;
     
 }
 
@@ -150,6 +152,15 @@ input{
     border-radius: 5px;
     border-color: #e5e5e5;
     max-width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+    input{
+        max-width: 150px;
+    }
+
+    /* .short-text { display: inline-block; }
+    .full-text { display: none; } */
 }
 
 
