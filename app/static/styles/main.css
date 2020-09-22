@@ -217,7 +217,7 @@ body {
     height: 100vh !important;
     width: 100vw !important;
     background-color: #edf6f9;
-    padding-left: 130px;
+    /* padding-left: 130px; */
 }
 
 .google-btn {
@@ -276,20 +276,21 @@ body {
 .overlay-text{
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    margin-top: 5%;
+    /* margin-top: 5%; */
     color: #6E6D7A;
-    padding-right: 25%;  
+    /* padding-right: 25%;   */
     font-weight: 400; 
 }
 
 .text_column{
-    padding-top: 12%;
+    /* padding-top: 12%; */
 }
 
 .landing-img{
-    width: 80%;
-    height: 80%;
-    margin-top: 20%;
+    /* width: 80%;
+    height: 80%; */
+    /* margin-top: 20%; */
+    /* padding-top: 20% ; */
 }
 
 .subheading{
@@ -327,5 +328,16 @@ body {
     animation-duration: 1.2s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    margin-bottom: 5%;
+}
+
+.landing-page{
+    padding-top: 12%;
+}
+
+.image-small{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 30px;
 }
 

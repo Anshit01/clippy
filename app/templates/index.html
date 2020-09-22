@@ -18,21 +18,25 @@
 </head>
 <body> 
     <div 
-        class="landing-page
+        class="container-fluid landing-page
         {% if loggedin %}
         hidden
         {% endif %}
         ">
         <div class="row">
         
-            <div class="col-md-6 text_column">
+            <div class="col-md-5 text_column offset-md-1">
 
                 <h1 class="overlay-heading">Clippy</h1>
                 <hr>
                 <h3 class="subheading">The overpowered clipboard</h3>
+
+                <img src="static/styles/images/landing.png" class=" d-md-none img-fluid image-small">
+
                 <p class="overlay-text">Share text to multiple devices with realtime sync. Sign in with the same account on multiple devices to see the magic!
                     A safe place to save your clips. View same document on multiple devices at same point of time.
                 </p>
+
                 <div class="google-btn">
                     <div class="google-icon-wrapper">
                       <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
@@ -42,8 +46,8 @@
 
             </div>
 
-            <div class="col-md-6 ">
-                <img src="static/styles/images/landing.png" class="landing-img">
+            <div class="col-md-5 col-lg-4  offset-md-1">
+                <img src="static/styles/images/landing.png " class="img-fluid landing-img d-none d-md-block">
             </div>
         </div>
 
