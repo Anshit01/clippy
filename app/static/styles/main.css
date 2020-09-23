@@ -59,18 +59,22 @@ body {
     color: #fff;
 }
 
-.save {
+.clips-btn {
     background-color:#9d4edd;
     color: #fff;
 }
 
-.save:hover{
+.clips-btn:hover{
     color: #fff;
     cursor: pointer;
 }
 
-.save:focus{
+.clips-btn:focus{
     outline: 0;
+}
+
+.clips-btn:focus .tool-tiptext {
+    visibility: hidden;
 }
 
 
@@ -373,7 +377,7 @@ body {
 .tool-tip .tool-tiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -393,7 +397,7 @@ body {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: black transparent transparent transparent;
+    border-color: rgba(0, 0, 0, 0.5) transparent transparent transparent;
   }
   
   .tool-tip:hover .tool-tiptext {
