@@ -54,7 +54,12 @@ $(document).ready( () => {
             newClipName += '-' + ind
         }
         showLoading()
-        socket.emit('new_clip', userId, newClipName)
+        socket.emit('new_clip', userId, newClipName, clipId)
+    })
+
+    $('#delete-btn').click(function() {
+        showLoading()
+        socket.emit('delete_clip', connectionId, clipId)
     })
 
     $('.recent-clip').on('click', function() {
@@ -103,9 +108,9 @@ $(document).ready( () => {
             var content = ''
             for(clip_id in clipList){
                 content += '<a id="' + clip_id + '" class="dropdown-item recent-clip">' + clipList[clip_id] + '</a>'
-                if(i < clipLength){
-                    content += '<div class="dropdown-divider"></div>'
-                }
+                // if(i < clipLength){
+                //     content += '<div class="dropdown-divider"></div>'
+                // }
                 i++
             }
             $('#recent-clip-list').html(content)
@@ -130,7 +135,7 @@ $(document).ready( () => {
     })
 
     socket.on('text_response', (con_id, text, clip_id, clip_name, timestamp) => {
-        if(connectionId != con_id && timestamp > lastUpdateTime){
+        if(connectionId != con_id && clip_id == clipId && timestamp > lastUpdateTime){
             textareaText = text
             $('#textarea').val(text)
         }
@@ -146,14 +151,16 @@ $(document).ready( () => {
         }
     })
 
-    socket.on('new_clip_response', (err, newClipId, newClipName) => {
+    socket.on('new_clip_response', (err, newClipId, newClipName, old_clip_id) => {
         if(err){
             console.error(err)
         }else{
-            setClip(newClipId, newClipName, '')
+            if(clipId == old_clip_id){
+                setClip(newClipId, newClipName, '')
+            }
             $('#recent-clip-list').html(
                 '<a id="' + clipId + '" class="dropdown-item recent-clip">' + clipName + '</a>'
-                + '<div class="dropdown-divider"></div>'
+                // + '<div class="dropdown-divider"></div>'
                 + $('#recent-clip-list').html()
             )
             $('.recent-clip').on('click', function() {
@@ -163,6 +170,19 @@ $(document).ready( () => {
             })
         }
         hideLoading()
+    })
+
+    socket.on('delete_clip_response', (connection_id, old_clip_id, new_clip_id) => {
+        console.log('Deleted clip: ' + old_clip_id)
+        $('#' + old_clip_id).remove()
+        if(connection_id == connectionId){
+            if(new_clip_id == ''){
+                $('#new-btn').trigger('click')
+            }
+        }
+        if(old_clip_id == clipId && new_clip_id != ''){
+            socket.emit('get_clip', userId, new_clip_id)
+        }
     })
 
     socket.on('logout_response', (err, res) => {
