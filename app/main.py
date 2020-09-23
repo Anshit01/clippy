@@ -123,7 +123,7 @@ def handle_logout():
     emit('logout_response', (err, res))
 
 @socketio.on('new_clip')
-def handle_new_clip(user_id, clip_name, old_clip_id):
+def handle_new_clip(user_id, clip_name, clip_data, old_clip_id):
     user_doc = users_collection.find_one({'_id': user_id}, {'recent_clip_id': 1})
     err = ''
     if(user_doc):
@@ -135,16 +135,16 @@ def handle_new_clip(user_id, clip_name, old_clip_id):
         clips_collection.insert_one({
             '_id': new_clip_id,
             'clip_name': clip_name,
-            'data': ''
+            'data': clip_data
         })
         users_collection.update_one(
             {'_id': user_id},
             {'$set': {'recent_clip_id': new_clip_id}}
         )
-        emit('new_clip_response', (err, new_clip_id, clip_name, old_clip_id), room=user_id)
+        emit('new_clip_response', (err, new_clip_id, clip_name, clip_data, old_clip_id), room=user_id)
     else:
         err = 'Unauthorized access'
-        emit('new_clip_response', (err, '', clip_name, old_clip_id))
+        emit('new_clip_response', (err, '', clip_name, clip_data, old_clip_id))
 
 
 @socketio.on('get_clip')

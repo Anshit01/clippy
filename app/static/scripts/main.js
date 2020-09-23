@@ -54,7 +54,7 @@ $(document).ready( () => {
             newClipName += '-' + ind
         }
         showLoading()
-        socket.emit('new_clip', userId, newClipName, clipId)
+        socket.emit('new_clip', userId, newClipName, '', clipId)
     })
 
     $('#delete-btn').click(function() {
@@ -62,11 +62,29 @@ $(document).ready( () => {
         socket.emit('delete_clip', connectionId, clipId)
     })
 
+    $('#open-btn').click(function() {
+        $('#file-selector').click()
+    })
+
+    $('#file-selector').change(function(event) {
+        var file = event.target.files[0]
+        var fileName = file.name
+        var fileReader = new FileReader()
+        fileReader.readAsText(file)
+        fileReader.addEventListener('load', function(e) {
+            var fileContent = e.target.result
+            socket.emit('new_clip', userId, fileName, fileContent, clipId)
+            showLoading()
+        })
+    })
+
     $('.recent-clip').on('click', function() {
         var selectedClipId = $(this).attr('id')
         showLoading()
         socket.emit('get_clip', userId, selectedClipId)
     })
+
+    $('')
 
     $('#login-btn, #google-signin').click(() => {
         if($('#login-btn').html() == 'Sign in'){
@@ -151,12 +169,12 @@ $(document).ready( () => {
         }
     })
 
-    socket.on('new_clip_response', (err, newClipId, newClipName, old_clip_id) => {
+    socket.on('new_clip_response', (err, newClipId, newClipName, clip_data, old_clip_id) => {
         if(err){
             console.error(err)
         }else{
             if(clipId == old_clip_id){
-                setClip(newClipId, newClipName, '')
+                setClip(newClipId, newClipName, clip_data)
             }
             $('#recent-clip-list').html(
                 '<a id="' + clipId + '" class="dropdown-item recent-clip">' + clipName + '</a>'
@@ -228,6 +246,8 @@ function login() {
         photoURL = result.user.photoURL
         socket.emit('login', name, email, uid, photoURL)
         console.log('logged in')
+        showLandingPage(false)
+        showLoading()
     }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
