@@ -69,13 +69,18 @@ $(document).ready( () => {
     $('#file-selector').change(function(event) {
         var file = event.target.files[0]
         var fileName = file.name
-        var fileReader = new FileReader()
-        fileReader.readAsText(file)
-        fileReader.addEventListener('load', function(e) {
-            var fileContent = e.target.result
-            socket.emit('new_clip', userId, fileName, fileContent, clipId)
-            showLoading()
-        })
+        var fileSize = file.size
+        if(fileSize <= 102400){
+            var fileReader = new FileReader()
+            fileReader.readAsText(file)
+            fileReader.addEventListener('load', function(e) {
+                var fileContent = e.target.result
+                socket.emit('new_clip', userId, fileName, fileContent, clipId)
+                showLoading()
+            })
+        }else {
+            alert('File size limit of 100KB exceded.')
+        }
     })
 
     $('.recent-clip').on('click', function() {
