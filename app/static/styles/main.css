@@ -44,7 +44,7 @@ body {
 } 
 
 .delete {
-	background-color:#fb8500;
+	background-color:#ef233c;
 }
 
 .delete:hover{
@@ -52,7 +52,7 @@ body {
 }
 
 .open {
-	background-color:#ef233c;
+	background-color:#fb8500;
 }
 
 .open:hover{
@@ -122,9 +122,16 @@ body {
     font-size: 1.1em;
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 992px){
+    .bottom-bar{
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 768px){
     .bottom-bar{
         width: 300px;
+        transform: translateX(-50%) scale(0.8);
     }
 }
 
