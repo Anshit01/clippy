@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room, rooms
 from flask_session import Session
 from pymongo import MongoClient
 import uuid
+import random
 import time
 
 from app import config
@@ -122,7 +123,7 @@ def handle_logout():
     emit('logout_response', (err, res))
 
 @socketio.on('new_clip')
-def handle_new_clip(user_id, clip_name):
+def handle_new_clip(user_id, clip_name, old_clip_id):
     user_doc = users_collection.find_one({'_id': user_id}, {'recent_clip_id': 1})
     err = ''
     if(user_doc):
@@ -140,10 +141,10 @@ def handle_new_clip(user_id, clip_name):
             {'_id': user_id},
             {'$set': {'recent_clip_id': new_clip_id}}
         )
-        emit('new_clip_response', (err, new_clip_id, clip_name), room=user_id)
+        emit('new_clip_response', (err, new_clip_id, clip_name, old_clip_id), room=user_id)
     else:
         err = 'Unauthorized access'
-        emit('new_clip_response', (err, '', clip_name))
+        emit('new_clip_response', (err, '', clip_name, old_clip_id))
 
 
 @socketio.on('get_clip')
@@ -162,12 +163,32 @@ def handle_get_clip(user_id, clip_id):
         err = 'Invalid User ID'
     emit('clip_response', (err, clip_id, clip_name, clip_data))
 
+
+@socketio.on('delete_clip')
+def handle_delete_clip(connection_id, clip_id):
+    print('delete: '+ clip_id)
+    if is_loggedin():
+        user_id = session['user_id']
+        clip_list_collection.update_one(
+            {'_id': user_id},
+            {'$unset': {clip_id: ''}}
+        )
+        clips_collection.delete_one({'_id': clip_id})
+        clips_list = clip_list_collection.find_one({'_id': user_id}, {'_id': 0})
+        new_clip_id = ''
+        if len(clips_list):
+            new_clip_id = next(iter(clips_list))
+        emit('delete_clip_response', (connection_id, clip_id, new_clip_id), room=user_id)
+
+
 @socketio.on('update_text')
 def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
-    print('User_id: ' + user_id)
-    print('Room:' + str(rooms()))
-    print('Text: ' + text)
+    # print('User_id: ' + user_id)
+    # print('Room:' + str(rooms()))
+    # print('Text: ' + text)
     if is_loggedin():
+        if clip_name == '':
+            clip_name = 'clip-' + str(random.randint(11, 99))
         clips_collection.update_one(
             {'_id': clip_id},
             {'$set': {'clip_name': clip_name, 'data': text}}
@@ -176,7 +197,7 @@ def handle_text(connection_id, user_id, clip_id, clip_name, text, timestamp):
             {'_id': user_id},
             {'$set': {clip_id: clip_name}}
         )
-        emit('text_response', (connection_id, text, timestamp), room=user_id)
+        emit('text_response', (connection_id, text, clip_id, clip_name, timestamp), room=user_id)
 
 
 
