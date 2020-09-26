@@ -39,12 +39,22 @@ body {
 	background-color:#0C9;
 }
 
+     .tool-new{
+    background-color:#0C9;
+    border-color: #0C9;
+}
+
 .new:hover{
     color:#FFF;
 } 
 
 .delete {
 	background-color:#ef233c;
+}
+
+.tool-delete{
+    background-color:#ef233c;
+    border-color: #ef233c;
 }
 
 .delete:hover{
@@ -55,6 +65,11 @@ body {
 	background-color:#fb8500;
 }
 
+.tool-open {
+    background-color:#fb8500;
+    border-color: #fb8500;
+}
+
 .open:hover{
     color: #fff;
 }
@@ -62,6 +77,11 @@ body {
 .save {
     background-color:#9d4edd;
     color: #fff;
+}
+
+.tool-save {
+    background-color:#9d4edd;
+    border-color: #9d4edd; 
 }
 
 .save:hover{
@@ -140,7 +160,7 @@ body {
 
 .clip-name {
     border: none;
-    border-bottom: 2px solid rgb(102, 180, 50);
+    border-bottom: 2px solid rgb(206, 233, 240);
     border-radius: 0;
     padding: 3px 8px;
     background-color: inherit;
@@ -150,7 +170,7 @@ body {
 .clip-name:focus, .clip-name:active, .clip-name:hover {
     padding-bottom: 1px;
     /* margin-bottom: 2px; */
-    border-bottom: 4px solid rgb(102, 180, 50);
+    border-bottom: 4px solid rgb(206, 233, 240);
     outline: none;
 }
 
@@ -185,9 +205,9 @@ body {
 }
 
 input{
-    border-radius: 5px;
     border-color: #e5e5e5;
-    max-width: 300px;
+    max-width: 150px;
+    float: left;
 }
 
 @media only screen and (max-width: 600px) {
@@ -364,16 +384,10 @@ body {
 }
 
 /*----------------------------------tool-tip--------------------------------*/
-.tool-tip {
-    /* position: relative; */
-    /* display: inline-block; */
-    /* visibility: visible; */
-}
 
 .tool-tip .tool-tiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -383,6 +397,7 @@ body {
     bottom: 150%;
     left: 50%;
     margin-left: -60px;
+    
   }
   
   .tool-tip .tool-tiptext::after {
@@ -393,13 +408,11 @@ body {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: black transparent transparent transparent;
   }
   
   .tool-tip:hover .tool-tiptext {
     visibility: visible;
   }
-
 
   #file-selector {
       display: none;
