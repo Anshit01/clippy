@@ -15,3 +15,6 @@
 ![working (2)](https://user-images.githubusercontent.com/57187745/96185750-fdd38000-0f57-11eb-848a-29c933ec73ec.png)
 ## Let's Go :thumbsup:
 https://clippy-clipboard.herokuapp.com/
+
+-------------
+Made with :heart:  by [Anshit](https://github.com/Anshit01) and [Shwetal](https://github.com/shwetalsoni)
