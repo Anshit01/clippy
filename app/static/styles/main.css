@@ -74,7 +74,7 @@ body {
     color: #fff;
 }
 
-.save {
+.clips-btn {
     background-color:#9d4edd;
     color: #fff;
 }
@@ -89,8 +89,12 @@ body {
     cursor: pointer;
 }
 
-.save:focus{
+.clips-btn:focus{
     outline: 0;
+}
+
+.clips-btn:focus .tool-tiptext {
+    visibility: hidden;
 }
 
 
